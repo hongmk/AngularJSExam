@@ -22,7 +22,7 @@ angular.module('angularJsexamApp')
   				}).then(function(response){
   					defered.resolve(response);
   				}, function(response) {
-  					window.alert(JSON.stringify(response));
+  					//window.alert(JSON.stringify(response));
   				});
   				return defered.promise;
   			},
@@ -75,10 +75,18 @@ angular.module('angularJsexamApp')
   			}
   		}
   	}])
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', ["$scope", "$location" ,function ($scope, $location) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+
+    $scope.$on('$viewContentLoaded', function() {
+        var os = $location.search().os;
+        if(os != undefined) {
+          window.alert(os+"hello");
+        }
+    });
+
+  }]);
